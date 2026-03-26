@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: maturiresults-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://maturiresults.in,https://www.maturiresults.in
+
