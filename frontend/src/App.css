@@ -1,0 +1,293 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f3f3f3;
+}
+
+/* CENTER */
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD */
+.login-card {
+  width: 440px;
+  min-height: 600px;
+  background: #fff;
+  padding: 46px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* LOGO */
+.logo {
+  width: 78px;
+  margin-bottom: 14px;
+}
+
+/* TITLE */
+.heading {
+  font-size: 20px;
+  margin-bottom: 26px;
+}
+
+/* INPUT */
+.input-field {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-field input {
+  width: 100%;
+  height: 56px;
+  padding: 0 56px 0 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 17px;
+}
+
+/* ICON BOX */
+.icon-box {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  background: #0b2f5b;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-box svg {
+  color: white;
+  font-size: 15px;
+}
+
+/* 🔥 TOSS ANIMATION */
+.toss {
+  animation: tossAnim 0.8s infinite ease-in-out;
+}
+
+@keyframes tossAnim {
+  0% {
+    transform: translateY(-50%) scale(1);
+  }
+  30% {
+    transform: translateY(-80%) scale(1.1);
+  }
+  60% {
+    transform: translateY(-30%) scale(0.95);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+/* OPTIONS */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.right-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* LINKS */
+.link {
+  color: blue;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.privacy-inline {
+  white-space: nowrap;
+}
+
+/* BUTTON */
+.login-btn {
+  width: 100%;
+  height: 56px;
+  margin-top: 8px;
+  background: #0b2f5b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+@media (max-width: 520px) {
+  .login-card {
+    width: calc(100% - 28px);
+    min-height: 520px;
+    padding: 30px 22px;
+  }
+
+  .row {
+    align-items: flex-start;
+  }
+
+  .right-links {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+}
+
+/* LOADER */
+.loader {
+  margin-top: 15px;
+}
+
+.spinner {
+  margin: auto;
+  width: 25px;
+  height: 25px;
+  border: 3px solid #ccc;
+  border-top: 3px solid #0b2f5b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* LOADING SCREEN */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.dice-container {
+  width: 280px;
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  perspective: 1500px;
+  position: relative;
+}
+
+.dice-container::before {
+  content: '';
+  position: absolute;
+  width: 170px;
+  height: 28px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.46) 0%, rgba(0, 0, 0, 0) 72%);
+  border-radius: 50%;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.cube {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  margin-bottom: 38px;
+  animation: tossCube 2s ease-in-out infinite;
+}
+
+.cube-face {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: rgba(44, 110, 175, 0.3);
+  border: 2px solid rgba(52, 124, 196, 0.9);
+  border-radius: 8px;
+  backface-visibility: hidden;
+  box-shadow: 0 0 16px rgba(42, 102, 165, 0.55), inset 0 0 10px rgba(94, 156, 219, 0.22);
+  top: 0;
+  left: 0;
+}
+
+.cube-face.front {
+  background: rgba(58, 126, 191, 0.34);
+  transform: translateZ(60px);
+}
+
+.cube-face.back {
+  background: rgba(32, 88, 146, 0.26);
+  transform: rotateY(180deg) translateZ(60px);
+}
+
+.cube-face.right {
+  background: rgba(42, 102, 165, 0.3);
+  transform: rotateY(90deg) translateZ(60px);
+}
+
+.cube-face.left {
+  background: rgba(36, 95, 156, 0.29);
+  transform: rotateY(-90deg) translateZ(60px);
+}
+
+.cube-face.top {
+  background: rgba(76, 144, 207, 0.34);
+  transform: rotateX(90deg) translateZ(60px);
+}
+
+.cube-face.bottom {
+  background: rgba(28, 78, 132, 0.26);
+  transform: rotateX(-90deg) translateZ(60px);
+}
+
+@keyframes tossCube {
+  0% {
+    transform: rotateX(-28deg) rotateY(40deg) translateY(-12px);
+    opacity: 1;
+  }
+  25% {
+    transform: rotateX(-24deg) rotateY(118deg) translateY(-88px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: rotateX(-20deg) rotateY(196deg) translateY(-146px);
+    opacity: 0.86;
+  }
+  75% {
+    transform: rotateX(-22deg) rotateY(274deg) translateY(-82px);
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotateX(-28deg) rotateY(352deg) translateY(-12px);
+    opacity: 1;
+  }
+}
