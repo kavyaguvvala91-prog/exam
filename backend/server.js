@@ -15,9 +15,19 @@ const allowedOrigins = (process.env.CORS_ORIGINS || "")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+const isAllowedByPattern = (origin) => {
+  // Allow Vercel deployment URLs and localhost during development.
+  return /\.vercel\.app$/i.test(origin) || /localhost|127\.0\.0\.1/i.test(origin);
+};
+
 const corsOptions = {
   origin(origin, callback) {
-    if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+    if (
+      !origin ||
+      allowedOrigins.length === 0 ||
+      allowedOrigins.includes(origin) ||
+      isAllowedByPattern(origin)
+    ) {
       callback(null, true);
       return;
     }
