@@ -7,7 +7,9 @@ import { connectToDatabase, getDatabaseStatus } from "./db.js";
 dotenv.config();
 
 const app = express();
-const PORT = Number(process.env.PORT) || 5000;
+const DEFAULT_PORT = 5000;
+const MAX_PORT_ATTEMPTS = 20;
+const PORT = Number(process.env.PORT) || DEFAULT_PORT;
 const allowedOrigins = (process.env.CORS_ORIGINS || "")
   .split(",")
   .map((origin) => origin.trim())
@@ -40,7 +42,7 @@ app.get("/api/health", (req, res) => {
 // routes
 app.use("/api/auth", authRoutes);
 
-const startListening = (port) => {
+const startListening = (port, attempt = 0) => {
   const server = app.listen(port, () => {
     console.log(`Server running on port ${port}`);
     connectToDatabase();
@@ -48,8 +50,16 @@ const startListening = (port) => {
 
   server.on("error", (err) => {
     if (err.code === "EADDRINUSE") {
-      console.error(`Port ${port} is already in use. Free it and restart the backend.`);
-      process.exit(1);
+      if (attempt >= MAX_PORT_ATTEMPTS) {
+        console.error(
+          `Unable to find an open port after ${MAX_PORT_ATTEMPTS + 1} attempts starting at ${PORT}.`
+        );
+        process.exit(1);
+      }
+
+      const nextPort = port + 1;
+      console.warn(`Port ${port} is in use. Retrying on port ${nextPort}...`);
+      startListening(nextPort, attempt + 1);
       return;
     }
 
