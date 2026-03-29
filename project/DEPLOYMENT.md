@@ -11,10 +11,10 @@ The login page is already mounted at `/`, so once the domain points to the deplo
 
 ## Files added for deployment
 
-- Root Render config: [render.yaml](/C:/Users/Kavya/OneDrive/Desktop/exam/render.yaml)
-- Frontend Vercel config: [frontend/vercel.json](/C:/Users/Kavya/OneDrive/Desktop/exam/frontend/vercel.json)
-- Frontend env example: [frontend/.env.example](/C:/Users/Kavya/OneDrive/Desktop/exam/frontend/.env.example)
-- Backend env example: [backend/.env.example](/C:/Users/Kavya/OneDrive/Desktop/exam/backend/.env.example)
+- Root Render config: `render.yaml`
+- Frontend Vercel config: `frontend/vercel.json`
+- Frontend env example: `frontend/.env.example`
+- Backend env example: `backend/.env.example`
 
 ## 1. Put the code on GitHub
 
@@ -37,7 +37,7 @@ Make sure Atlas network access allows your backend host.
 1. Go to Render
 2. Create a new `Web Service`
 3. Connect your GitHub repo
-4. Render can use [render.yaml](/C:/Users/Kavya/OneDrive/Desktop/exam/render.yaml) automatically
+4. Render can use `render.yaml` automatically
 
 If you enter settings manually, use:
 
@@ -75,7 +75,7 @@ https://maturiresults-api.onrender.com/api/health
 1. Go to Vercel
 2. Import the same GitHub repo
 3. Set the project root directory to `frontend`
-4. Vercel will use [frontend/vercel.json](/C:/Users/Kavya/OneDrive/Desktop/exam/frontend/vercel.json) for SPA routing
+4. Vercel will use `frontend/vercel.json` for SPA routing
 
 Set this env var in Vercel:
 
